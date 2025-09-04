@@ -316,7 +316,7 @@ class ContentTemplate extends Element
         $this->description = $request->getBodyParam('description');
         $config = $this->getConfig();
 
-        if ($this->getIsDraft()) {
+        if (!Plugin::$plugin->getSettings()->useProjectConfig || $this->getIsDraft()) {
             Plugin::$plugin->projectConfig->save($this->uid, $config);
         } else {
             // Save the position in the order first
@@ -350,7 +350,7 @@ class ContentTemplate extends Element
     {
         $projectConfig = Craft::$app->getProjectConfig();
 
-        if (!$projectConfig->getIsApplyingExternalChanges()) {
+        if (Plugin::$plugin->getSettings()->useProjectConfig && !$projectConfig->getIsApplyingExternalChanges()) {
             // Remove this content template's data from the project config
             $projectConfig->remove("contentTemplates.$this->uid");
             $projectConfig = Craft::$app->getProjectConfig();

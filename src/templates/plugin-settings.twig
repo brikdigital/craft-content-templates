@@ -12,4 +12,14 @@
         required: true,
         errors: settings.getErrors('previewSource'),
     }) }}
+
+    {{ forms.checkbox({
+        label: 'Use Project Config',
+        instructions: "Whether to store content templates in Craft's project config",
+        id: 'useProjectConfig',
+        name: 'useProjectConfig',
+        value: settings.useProjectConfig,
+        required: true,
+        errors: settings.getErrors('useProjectConfig')
+    }) }}
 </div>
